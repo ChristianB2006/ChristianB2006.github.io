@@ -26,7 +26,7 @@ var background = function (window) {
         var background;
         
         // ANIMATION VARIABLES HERE:
-        
+        var tree = draw.bitmap("img/tree.png");
      
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
@@ -50,8 +50,8 @@ var background = function (window) {
             };
             
             var moon = draw.bitmap("img/moon.png");
-            moon.x = 800;
-            moon.y = -100;
+            moon.x = 1300;
+            moon.y = 0;
             moon.scaleX = 0.5;
             moon.scaleY = 0.5;
             background.addChild(moon);
@@ -60,7 +60,10 @@ var background = function (window) {
             
             
             // TODO 4: Part 1 - Add a tree
-            
+            tree = draw.bitmap("img/tree.png");
+            tree.x = groundY + 400;
+            tree.y = 250;
+            background.addChild(tree);
             
         } // end of render function - DO NOT DELETE
         
@@ -74,7 +77,11 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 4: Part 2 - Move the tree!
-            
+            tree.x = tree.x - 1;
+
+            if (tree.x < -200) {
+            tree.x = canvasWidth;
+            }
             
             // TODO 5: Part 2 - Parallax
             
