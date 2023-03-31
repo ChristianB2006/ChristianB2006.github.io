@@ -9,7 +9,7 @@
     
     /*
 
-    Create a heads-up display for our game showing a scoreand an 
+    Create a heads-up display for our game showing a score and an 
     "integrity meter" which indicates our health. The returned object is a 
     create.js container which can be added to our game using the following code:
       
@@ -34,14 +34,14 @@
         hud = new createjs.Container();
         
         integrity = new createjs.Container();
-        background = draw.rect(104, 20, '#CCC');
+        background = draw.rect(104, 20, 'red');
         draw.rect(102, 18, '#FFF', null, null, 1, 1, background);
         integrity.addChild(background);
         
-        txtScore = draw.textfield('score : 000', "19px Arial", '#666', 'left');
+        txtScore = draw.textfield('score : 000', "20px Arial", 'white', 'left');
         hud.addChild(txtScore);
         
-        integrityMeter = draw.rect(1, 16, '#3333CC');
+        integrityMeter = draw.rect(1, 16, 'red');
         integrityMeter.scaleX = 100;
         integrity.addChild(integrityMeter);
         hud.addChild(integrity);
