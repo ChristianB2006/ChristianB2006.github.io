@@ -93,7 +93,12 @@ var background = function (window) {
             
             // TODO 5: Part 2 - Parallax
             for (var i = 0; i < buildings.length; i++) {
-                var buildings = buildings[i];
+                building = buildings[i];
+                var building;
+                building.x = building.x - 0.1;
+                if (building.x < -200) {
+                    building.x = canvasWidth;
+                }
               
                 // code to do something with each element
               }
