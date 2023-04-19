@@ -42,8 +42,55 @@ var level01 = function (window) {
         };
         
         createSawBlade(1000, 470);
-        createSawBlade(1500, 370);
+        createSawBlade(1500, 350);
         createSawBlade(2000, 420);
+
+        function createEnemy(x, y) {
+            var enemy = game.createGameItem("enemy", 25);
+            var redSquare = draw.rect(50, 50, "red");
+            redSquare.x = -25;
+            redSquare.y = -25;
+            enemy.addChild(redSquare);
+            enemy.x = x;
+            enemy.y = y;
+            game.addGameItem(enemy);
+            enemy.velocityX = -4;
+            enemy.rotationalVelocity = 20;
+
+            enemy.onPlayerCollision = function () {
+                game.changeIntegrity(-30)
+            };
+            enemy.onProjectileCollision = function () {
+                game.increaseScore(100);
+                enemy.flyTo(1500,groundY);
+            };
+        };
+
+        createEnemy(400, groundY - 10);
+        createEnemy(800, groundY - 120);
+        createEnemy(1200, groundY - 50);
+
+        function createReward(x, y) {
+            var reward = game.createGameItem("reward", 20);
+            var goldCoin = draw.circle(20, 20, "gold");
+            goldCoin.x = -20;
+            goldCoin.y = -20;
+            reward.addChild(goldCoin);
+            reward.x = x;
+            reward.y = y;
+            game.addGameItem(reward);
+            reward.velocityX = -2;
+            reward.rotationalVelocity = 5;
+
+            reward.onPlayerCollision = function () {
+                game.changeIntegrity(40);
+                game.increaseScore(250);
+            };
+        };
+
+        createReward(900, groundY - 120)
+        createReward(300, groundY - 20)
+        createReward(600, groundY - 20)
         
         // DO NOT EDIT CODE BELOW HERE
     }
