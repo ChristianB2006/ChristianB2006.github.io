@@ -91,6 +91,30 @@ var level01 = function (window) {
         createReward(900, groundY - 120)
         createReward(300, groundY - 20)
         createReward(600, groundY - 20)
+
+
+        function createMarker(x, y) {
+            var marker = game.createGameItem("marker", 40);
+            var visualMarker = draw.rect(30, 80, "red");
+            visualMarker.x = -40;
+            visualMarker.y = -40;
+            marker.addChild(visualMarker);
+            marker.x = x;
+            marker.y = y;
+            game.addGameItem(marker);
+            marker.velocityX = -0.8;
+
+            marker.onPlayerCollision = function () {
+                startLevel(2)
+            };
+
+            marker.onProjectileCollision = function () {
+                startLevel(2)
+            };
+        };
+        
+        createMarker(1500, groundY - 30)
+
         
         // DO NOT EDIT CODE BELOW HERE
     }
