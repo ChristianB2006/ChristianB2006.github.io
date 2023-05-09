@@ -19,6 +19,12 @@ var level01 = function (window) {
                 { "type": "sawblade", "x": 400, "y": groundY },
                 { "type": "sawblade", "x": 600, "y": groundY },
                 { "type": "sawblade", "x": 900, "y": groundY },
+                { "type": "reward", "x": 1700, "y": groundY - 120},
+                { "type": "reward", "x": 1300, "y": groundY - 20},
+                { "type": "reward", "x": 2500, "y": groundY - 20},
+                { "type": "enemy", "x": 1000, "y": groundY - 50},
+                { "type": "enemy", "x": 1400, "y": groundY - 50},
+                { "type": "enemy", "x": 2100, "y": groundY - 50},
             ]
         };
         window.levelData = levelData;
@@ -66,9 +72,9 @@ var level01 = function (window) {
             };
         };
 
-        createEnemy(400, groundY - 10);
-        createEnemy(800, groundY - 120);
-        createEnemy(1200, groundY - 50);
+        createEnemy(1000, groundY - 50);
+        createEnemy(1400, groundY - 50);
+        createEnemy(2100, groundY - 50);
 
         function createReward(x, y) {
             var reward = game.createGameItem("reward", 20);
@@ -88,32 +94,9 @@ var level01 = function (window) {
             };
         };
 
-        createReward(900, groundY - 120)
-        createReward(300, groundY - 20)
-        createReward(600, groundY - 20)
-
-
-        function createMarker(x, y) {
-            var marker = game.createGameItem("marker", 40);
-            var visualMarker = draw.rect(30, 80, "red");
-            visualMarker.x = -40;
-            visualMarker.y = -40;
-            marker.addChild(visualMarker);
-            marker.x = x;
-            marker.y = y;
-            game.addGameItem(marker);
-            marker.velocityX = -0.8;
-
-            marker.onPlayerCollision = function () {
-                startLevel(2)
-            };
-
-            marker.onProjectileCollision = function () {
-                startLevel(2)
-            };
-        };
-        
-        createMarker(1500, groundY - 30)
+        createReward(1700, groundY - 120)
+        createReward(1300, groundY - 20)
+        createReward(2500, groundY - 20)
 
         
         // DO NOT EDIT CODE BELOW HERE
