@@ -19,12 +19,6 @@ var level01 = function (window) {
                 { "type": "sawblade", "x": 400, "y": groundY },
                 { "type": "sawblade", "x": 600, "y": groundY },
                 { "type": "sawblade", "x": 900, "y": groundY },
-                { "type": "reward", "x": 1700, "y": groundY - 120},
-                { "type": "reward", "x": 1300, "y": groundY - 20},
-                { "type": "reward", "x": 2500, "y": groundY - 20},
-                { "type": "enemy", "x": 1000, "y": groundY - 50},
-                { "type": "enemy", "x": 1400, "y": groundY - 50},
-                { "type": "enemy", "x": 2100, "y": groundY - 50},
             ]
         };
         window.levelData = levelData;
@@ -79,8 +73,8 @@ var level01 = function (window) {
         function createReward(x, y) {
             var reward = game.createGameItem("reward", 20);
             var goldCoin = draw.circle(20, 20, "gold");
-            goldCoin.x = -20;
-            goldCoin.y = -20;
+            goldCoin.x = 0;
+            goldCoin.y = 0;
             reward.addChild(goldCoin);
             reward.x = x;
             reward.y = y;
@@ -98,6 +92,27 @@ var level01 = function (window) {
         createReward(1300, groundY - 20)
         createReward(2500, groundY - 20)
 
+        function createMarker(x, y) {
+            var marker = game.createGameItem("marker", 20);
+            var markerDecal = draw.circle(20, 20, "green");
+            markerDecal.x = 0;
+            markerDecal.y = 0;
+            marker.addChild(markerDecal);
+            marker.x = x;
+            marker.y = y;
+            game.addGameItem(marker);
+            marker.velocityX = -2;
+
+            reward.onPlayerCollision = function () {
+                startLevel()
+            };
+            
+            reward.onProjectileCollision = function () {
+                startLevel()
+            };
+        };
+
+        createMarker(3000, groundY - 20)
         
         // DO NOT EDIT CODE BELOW HERE
     }
