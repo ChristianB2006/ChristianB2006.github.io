@@ -19,6 +19,12 @@ var level01 = function (window) {
                 { "type": "sawblade", "x": 400, "y": groundY },
                 { "type": "sawblade", "x": 600, "y": groundY },
                 { "type": "sawblade", "x": 900, "y": groundY },
+                { "type": "reward", "x": 1700, "y": groundY - 120},
+                { "type": "reward", "x": 1300, "y": groundY - 20},
+                { "type": "reward", "x": 2500, "y": groundY - 20},
+                { "type": "enemy", "x": 2000, "y": groundY - 20},
+                { "type": "enemy", "x": 1500, "y": groundY - 20},
+                { "type": "enemy", "x": 2500, "y": groundY - 20},
             ]
         };
         window.levelData = levelData;
@@ -103,16 +109,34 @@ var level01 = function (window) {
             game.addGameItem(marker);
             marker.velocityX = -2;
 
-            reward.onPlayerCollision = function () {
+            marker.onPlayerCollision = function () {
                 startLevel()
             };
             
-            reward.onProjectileCollision = function () {
+            marker.onProjectileCollision = function () {
                 startLevel()
             };
         };
 
-        createMarker(3000, groundY - 20)
+        createMarker(3000, groundY - 30)
+
+        function createObject(x, y) {
+            var object = game.createGameItem("marker", 20);
+            var objectDecal = draw.circle(20, 20, "green");
+            objectDecal.x = 0;
+            objectDecal.y = 0;
+            object.addChild(objectDecal);
+            object.x = x;
+            object.y = y;
+            game.addGameItem(object);
+            object.velocityX = -6;
+
+            object.onPlayerCollision = function () {
+                game.changeIntegrity(100)
+            };
+        };
+
+        createObject(2000, groundY - 100)
         
         // DO NOT EDIT CODE BELOW HERE
     }
