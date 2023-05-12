@@ -25,6 +25,7 @@ var level01 = function (window) {
                 { "type": "enemy", "x": 2000, "y": groundY - 20},
                 { "type": "enemy", "x": 1500, "y": groundY - 20},
                 { "type": "enemy", "x": 2500, "y": groundY - 20},
+                { "type": "object", "x": 2500, "y": groundY - 20},
             ]
         };
         window.levelData = levelData;
@@ -33,7 +34,7 @@ var level01 = function (window) {
 
         // TODO 6 and on go here
         // BEGIN EDITING YOUR CODE HERE
-        
+
         function createSawBlade(x, y) {
             var hitZoneSize = 25;
             var damageFromObstacle = 10;
@@ -121,8 +122,8 @@ var level01 = function (window) {
         createMarker(3000, groundY - 30)
 
         function createObject(x, y) {
-            var object = game.createGameItem("marker", 20);
-            var objectDecal = draw.circle(20, 20, "green");
+            var object = game.createGameItem("object", 20);
+            var objectDecal = draw.rect(40, 20, "tan");
             objectDecal.x = 0;
             objectDecal.y = 0;
             object.addChild(objectDecal);
@@ -132,7 +133,7 @@ var level01 = function (window) {
             object.velocityX = -6;
 
             object.onPlayerCollision = function () {
-                game.changeIntegrity(100)
+                game.changeIntegrity(-80)
             };
         };
 
