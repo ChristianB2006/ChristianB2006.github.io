@@ -77,19 +77,24 @@ function update() {
 
 function checkForNewDirection(event) {
   /* 
-  TODO 6b: Update snake.head.direction based on the value of activeKey.
-  
-  BONUS: Only allow direction changes to take place if the new direction is
+  TODO 6b: Update snake.head.direction based on the value of activeKey.*/
+  cont
+  /*BONUS: Only allow direction changes to take place if the new direction is
   perpendicular to the current direction
   */
 
   if (activeKey === KEY.LEFT) {
     snake.head.direction = "left";
-  }
-
+  } else if (activeKey === KEY.RIGHT) {
+    snake.head.direction = "right";
+  } else if (activeKey === KEY.UP) {
+    snake.head.direction = "up";
+  } else if (activeKey === KEY.DOWN) {
+    snake.head.direction = "down";
+  };
   // FILL IN THE REST
 
-  // console.log(snake.head.direction);     // uncomment me!
+  console.log(snake.head.direction);     // uncomment me!
 }
 
 function moveSnake() {
@@ -257,7 +262,8 @@ function makeSnakeSquare(row, column) {
 */
 function handleKeyDown(event) {
   // TODO 6a: make the handleKeyDown function register which key is pressed
-  
+  activeKey = event.which;
+  console.log(activeKey);
 }
 
 /* Given a gameSquare (which may be a snakeSquare or the apple), position
