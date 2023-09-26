@@ -78,7 +78,7 @@ function update() {
 function checkForNewDirection(event) {
   /* 
   TODO 6b: Update snake.head.direction based on the value of activeKey.*/
-  cont
+
   /*BONUS: Only allow direction changes to take place if the new direction is
   perpendicular to the current direction
   */
@@ -112,9 +112,18 @@ function moveSnake() {
   checkForNewDirection();
 
   /* 
-  TODO 7: determine the next row and column for the snake's head
-  
-  HINT: The snake's head will need to move forward 1 square based on the value
+  TODO 7: determine the next row and column for the snake's head*/
+  if (snake.head.direction === "left") {
+    snake.head.column = snake.head.column - 1;
+  } else if (snake.head.direction === "right") {
+    snake.head.column = snake.head.column + 1;
+  } else if (snake.head.direction === "up") {
+    snake.head.row = snake.head.row - 1;
+  } else if (snake.head.direction === "down") {
+    snake.head.row = snake.head.row + 1;
+  }
+  repositionSquare(snake.head);
+  /*HINT: The snake's head will need to move forward 1 square based on the value
   of snake.head.direction which may be one of "left", "right", "up", or "down"
   */
 }
@@ -122,9 +131,17 @@ function moveSnake() {
 function hasHitWall() {
   /* 
   TODO 8: Should return true if the snake's head has collided with the four walls of the
-  board, false otherwise.
-  
-  HINT: What will the row and column of the snake's head be if this were the case?
+  board, false otherwise.*/
+  if (snake.head.column > COLUMNS) {
+    return true;
+  } else if (snake.head.column < 0) {
+    return true;
+  } else if (snake.head.row < 0) {
+    return true;
+  } else if (snake.head.row > ROWS) {
+    return true;
+  }
+  /*HINT: What will the row and column of the snake's head be if this were the case?
   */
 
   return false;
@@ -133,12 +150,20 @@ function hasHitWall() {
 function hasCollidedWithApple() {
   /* 
   TODO 9: Should return true if the snake's head has collided with the apple, 
-  false otherwise
+  false otherwise*/
+  if (snake.head.row === apple.row) {
+    return true;
+  }
+  else if (snake.head.column === apple.column) {
+    return true;
+  } else {
+   
   
-  HINT: Both the apple and the snake's head are aware of their own row and column
+  /*HINT: Both the apple and the snake's head are aware of their own row and column
   */
 
   return false;
+  }
 }
 
 function handleAppleCollision() {
