@@ -11,9 +11,9 @@ var highScoreElement = $("#highScore");
 
 // TODO 4a: Create the snake, apple and score variables
 // Game Variables
-var snake = {}
-var apple = {}
-var score = 0
+var snake = {};
+var apple = {};
+var score = 0;
 // Constant Variables
 var ROWS = 20;
 var COLUMNS = 20;
@@ -43,9 +43,13 @@ init();
 
 function init() {
   // TODO 4b-2: initialize the apple
-  makeApple()
+  /*makeApple was not working as i needed to put the body declaration before it, that is why
+  snake.body is before makeApple and not where the step wants it to be
+  */
+   snake.body = [];
+   makeApple()
   // TODO 4c-2: initialize the snake
-  snake.body = [];
+ 
  // make the first snakeSquare and set it as the head
   makeSnakeSquare(10, 10);
   snake.head = snake.body[0];
@@ -363,6 +367,7 @@ function getRandomAvailablePosition() {
       var snakeSquare = snake.body[i];
       if (randomPosition.row === snakeSquare.row && randomPosition.column === snakeSquare.column) {
         spaceIsAvailable = false;
+        console.log(spaceIsAvailable)
       }
     }
   
