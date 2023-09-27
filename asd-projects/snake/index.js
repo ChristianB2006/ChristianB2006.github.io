@@ -151,10 +151,7 @@ function hasCollidedWithApple() {
   /* 
   TODO 9: Should return true if the snake's head has collided with the apple, 
   false otherwise*/
-  if (snake.head.row === apple.row) {
-    return true;
-  }
-  else if (snake.head.column === apple.column) {
+  if (snake.head.row === apple.row && snake.head.column === apple.column) {
     return true;
   } else {
    
@@ -177,15 +174,30 @@ function handleAppleCollision() {
 
   /* 
   TODO 10: determine the location of the next snakeSquare based on the .row,
-  .column and .direction properties of the snake.tail snakeSquare
-  
-  HINT: snake.tail.direction will be either "left", "right", "up", or "down".
+  .column and .direction properties of the snake.tail snakeSquare*/
+  // Determine the row and column of the next snakeSquare based on tail direction
+var row = 0;
+var column = 0;
+
+  if (snake.tail.direction === "left") {
+  row = snake.tail.row;
+  column = snake.tail.column - 1;
+} else if (snake.tail.direction === "right") {
+  row = snake.tail.row;
+  column = snake.tail.column + 1;
+} else if (snake.tail.direction === "up") {
+  row = snake.tail.row - 1;
+  column = snake.tail.column;
+} else if (snake.tail.direction === "down") {
+  row = snake.tail.row + 1;
+  column = snake.tail.column;
+}
+  /*HINT: snake.tail.direction will be either "left", "right", "up", or "down".
   If the tail is moving "left", place the next snakeSquare to its right. 
   If the tail is moving "down", place the next snakeSquare above it.
   etc...
   */
-  var row = 0;
-  var column = 0;
+
 
   // code to determine the row and column of the snakeSquare to add to the snake
 
