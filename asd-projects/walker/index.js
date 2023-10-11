@@ -18,7 +18,12 @@ function runProgram(){
     UP: 38,
     DOWN: 40
   };
-
+  var walker = {
+    xloc: 0,
+    yloc: 0,
+    xspeed: 0,
+    yspeed: 0
+  }
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
@@ -32,8 +37,8 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    
-
+    repositionGameItem()
+    redrawGameItem()
   }
   
   /* 
@@ -54,7 +59,14 @@ function runProgram(){
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+  function repositionGameItem() {
+    xloc += xspeed
+    yloc += yspeed
+  }
 
+  function redrawGameItem() {
+    $("#walker").css("top", xloc)
+  }
   
   function endGame() {
     // stop the interval timer
