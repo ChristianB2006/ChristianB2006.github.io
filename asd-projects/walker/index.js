@@ -28,6 +28,8 @@ function runProgram(){
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
 
+  $(document).on('keyup', handleKeyUp);
+
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -38,6 +40,7 @@ function runProgram(){
   */
   function newFrame() {
     repositionGameItem()
+    wallCollision()
     redrawGameItem()
   }
   
@@ -47,27 +50,48 @@ function runProgram(){
   function handleKeyDown(event) {
     if (event.which === KEY.LEFT) {
       console.log("left pressed");
+      walker.xspeed = -5;
     } else if (event.which === KEY.RIGHT) {
-      console.log("right pressed")
+      console.log("right pressed");
+      walker.xspeed = 5;
     } else if (event.which === KEY.UP) {
-      console.log("up pressed")
+      console.log("up pressed");
+      walker.yspeed = -5;
     } else if (event.which === KEY.DOWN) {
-      console.log("down pressed")
+      console.log("down pressed");
+      walker.yspeed = 5;
     }
   }
-
+function handleKeyUp(event) {
+  walker.xspeed = 0;
+  walker.yspeed = 0;
+}
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   function repositionGameItem() {
-    xloc += xspeed
-    yloc += yspeed
+    walker.xloc += walker.xspeed
+    walker.yloc += walker.yspeed
   }
 
   function redrawGameItem() {
-    $("#walker").css("top", xloc)
+    $("#walker").css("top", walker.yloc)
+    $("#walker").css("left", walker.xloc)
   }
   
+  function wallCollision() {
+    var bWidth = $("#board").width()
+    var bHeight = $("#board").height()
+    var wWidth = $("#walker").width();
+    var wHeight = $("#walker").height();
+
+    var maxX = bWidth - wWidth;
+    var maxY = bHeight - wHeight;
+
+    walker.xloc = Math.max(0, Math.min(walker.xloc, maxX));
+    walker.yloc = Math.max(0, Math.min(walker.yloc, maxY));
+  }
+
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
