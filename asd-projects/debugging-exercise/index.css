@@ -1,5 +1,5 @@
 #board {
-    background: black;
+    background: rgb(227, 253, 112);
     width: 300px;
     height: 300px;
     left: 0px;
@@ -8,7 +8,7 @@
 
 
 .circle {
-    background: blue;
+    background: rgb(30, 30, 31);
     width: 20px;
     height: 20px;
     border-radius: 10px;
